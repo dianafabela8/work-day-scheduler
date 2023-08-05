@@ -2,6 +2,9 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
+var today = dayjs();
+$('#currentDay').text(today.format('MMM D, YYYY'));
+
 $(function () {
 $(".saveBtn").click(function(){
   var textarea = $(this).siblings("textarea").val()
