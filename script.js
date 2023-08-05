@@ -1,7 +1,40 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
 $(function () {
+$(".saveBtn").click(function(){
+  var textarea = $(this).siblings("textarea").val()
+  console.log(textarea)
+  var rowid = $(this).parent().attr("id")
+  console.log(rowid)
+  localStorage.setItem(rowid, textarea)
+})
+
+$("#hour-9 .description").val(localStorage.getItem("hour-9"))
+$("#hour-10 .description").val(localStorage.getItem("hour-10"))
+$("#hour-11 .description").val(localStorage.getItem("hour-11"))
+$("#hour-12 .description").val(localStorage.getItem("hour-12"))
+$("#hour-13 .description").val(localStorage.getItem("hour-13"))
+$("#hour-14 .description").val(localStorage.getItem("hour-14"))
+$("#hour-15 .description").val(localStorage.getItem("hour-15"))
+$("#hour-16 .description").val(localStorage.getItem("hour-16"))
+$("#hour-17 .description").val(localStorage.getItem("hour-17"))
+
+var currentHour = new Date().getHours()
+console.log(currentHour)
+$(".time-block").each(function(){
+  var rowHour = parseInt($(this).attr("id").split("-")[1])
+  console.log(rowHour)
+  if (currentHour > rowHour) {
+    $(this).addClass("past")
+  } else if (currentHour === rowHour) {
+    $(this).addClass("present")
+  } else {
+    $(this).addClass("future")
+  }
+})
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
